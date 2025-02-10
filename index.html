@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Journal ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        overflow-x: hidden; /* Horizontal scroll disable */
+        }
+
+        .container {
+        display: none;
+        width: 100%;
+        min-height: 100vh; /* Height ko auto adjust karne ke liye */
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        opacity: 0;
+        overflow: auto; /* Scroll allow karne ke liye */
+        padding-bottom: 50px; /* Taaki button neeche chhup na jaaye */
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        transform: translateY(20px);
+        }
+
+        .active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #ff4d79;
+        }
+        p, .memory, .promises, .promise-day{
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+        }
+
+        .memory, .promises {
+            background: #ffccd5;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            text-align: left;
+        }
+
+        button {
+            background-color: #ff4d79;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        @keyframes floatingHearts {
+    0% { transform: translateY(0); opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 20px;
+    color: rgba(255, 77, 121, 0.8);
+    animation: floatingHearts 5s linear infinite;
+    pointer-events: none;
+}
+
+
+        button:hover {
+            background-color: #cc3c61;
+        }
+
+        .heart {
+    position: absolute;
+    font-size: 30px;
+    color: #ff4d79;
+    animation: floatUp 1.5s ease-in-out, glow 1s infinite alternate;
+    text-shadow: 0 0 10px rgba(255, 77, 121, 0.8), 0 0 20px rgba(255, 77, 121, 0.6);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 10px rgba(255, 77, 121, 0.8), 0 0 20px rgba(255, 77, 121, 0.6); }
+    100% { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 77, 121, 1); }
+}
+
+
+        .tenor-gif-embed {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 20px auto;
+        }
+
+        .promise-day {
+            background: #ffccff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+       
+
+        .sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #ffcc00; /* Golden sparkles */
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+    animation: sparkleEffect 0.8s ease-out;
+    pointer-events: none; /* Prevents interference with clicks */
+}
+
+@keyframes sparkleEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#section4 h1 {
+    animation: pulse 1.5s infinite;
+}
+
+
+
+        .start-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Yeh part full screen rahega */
+        background: #ffccd5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        }
+
+        h1,h2 p {
+    text-shadow: 0 0 10px rgba(255, 77, 121, 0.6);
+}
+
+.reply-box {
+    background: #ffebf0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+textarea {
+    width: 90%;
+    height: 80px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ff4d79;
+    font-size: 16px;
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+button {
+    background-color: #ff4d79;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #cc3c61;
+}
+
+#displayMessage {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff4d79;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.fortune-btn {
+    background-color: #ff4d79;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 20px;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Shake animation when button is clicked */
+.fortune-btn:active {
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Styling for the fortune message box */
+.fortune-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* When active, the box will fade in and bounce slightly */
+.fortune-box.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: bounce 0.5s ease-out;
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    0% { transform: translate(-50%, -55%) scale(0.8); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Smooth fade-out animation when closing */
+.fortune-box.hide {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="start-page" id="startPage">
+        <h1>Welcome Meri Motto 🥰❤️</h1>
+        <p>Please Niche wala button press kr dijiye 🫠</p>
+        <button onclick="startMusic()">Start Music 🎶</button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.dropbox.com/scl/fi/90icaheeji4p65a78cm94/Tum-Prem-Ho-Flute-Version-Mohit-Lalwani-Bharat-Kamal-Kiran-Vinkar-ML-Records-ML-Records.mp3?rlkey=t3euxhj1rfx6omm6nl1nczg2g&st=m62mhox0&dl=1" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>    
+
+    <div class="container" id="section1">
+        <h1>Apko jb pehli br dekha tb...📸</h1>
+        <p>Aap Kyu itni Pyari ho yr ?😩🥴,<br> Pta hai jb bhi Photo dekhta hu na hr br pehle se jyada pyaari lgti ho, <br>But chlo koi baat nhi itni chhut di apko ki aap bhav kha skti h(aakhir ho to meri pasandida hi😘)<br>Aur pta hai jb bhi aapse baat krta hu na mera sara stress , tension sb gayab ho jata hai , bhale hi apko wo baat btau ya nhi.</p>
+        <div class="tenor-gif-embed" data-postid="18038177795981558039" data-share-method="host" data-aspect-ratio="1.36813" data-width="100%"></div>
+        <button onclick="nextSection(1)">Thoda aur dekhiye na plss ➡️</button>
+    </div>
+
+    <div class="container" id="section2">
+        <h1>Proposal Day Special 💖</h1>
+        <div class="promise-day">
+            🌹 On this Proposal Day, I want to say, I love you forever and always.<br> Aap bhi Mujhe Jhelne k liye tyaar rhiye , <br>kyuki chhodne ki choice ab nhi hai apke pass 😁🌹
+        </div>
+	<div class="tenor-gif-embed" data-postid="22343387" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
+        <button onclick="nextSection(2)">Thoda sa aur plss ➡️</button>
+    </div>
+
+    <div class="container" id="section3">
+        <h1>My Promises to You 💖</h1>
+        <div class="promises">
+            💍 I promise Apko Pareshan Nhi karunga, apka sar nhi khaunga kbhi 👍❤️<br>
+            💕 I promise ki apke gussa hone pr bhi me apko manaunga, ulta gussa nhi krunga 🫡🥲<br>
+            🌟 I promise to make you smile even on your worst days.<br>
+            💞 I promise Mera love hamesha sirf apke liye hi rahega, kbhi bhi cheat nhi krunga.<br>
+        </div>
+	<div class="tenor-gif-embed" data-postid="8824691505375618737" data-share-method="host" data-aspect-ratio="1" data-width="100%"></div>
+        <button onclick="nextSection(3)">Pakka bss thoda sa aur...➡️</button>
+    </div>
+
+    <div class="container" id="section4">
+        <h1>You are my forever. I love you endlessly. 😘</h1>
+        <p>Hamesha Apki Baat manunga, Apse ldai ni krunga kbhi. <br>Bss mujhe apse ek cheez chahiye aur wo ye h ki jb kbhi bhi apko mujh pr gussa aaye to pls silent treatment nhi😥😭,<br> aur jb kbhi bhi apko mujh pr doubt ho ya kuchh bhi baat ho aap pehle mujhse share krogi bina kuchh pehle se decide kiye.<br> </p>
+        <p>Aur ha ab toh aapko bhi kuchh krna pdega, thoda sa bache pr bhi rehem khana pdega</p>
+        <h2>Thoda sa Neeche jaiye pls ⬇️</h2>
+        <div class="reply-box">
+            <h2>Meri Motto ka Reply 💌</h2>
+            <textarea id="loveMessage" placeholder="Apna pyaara message likho yaha..."></textarea>
+            <button onclick="showReply()">Send 💖</button>
+            <p id="displayMessage"></p>
+        </div> 
+        <a>
+        <a href="love-fortune.html" onclick="saveMusicTime()">
+
+            <button>Love Fortune Cookie 🍪</button>
+        </a> 
+        <section id="section4">
+            <h2>Final Part of the Page</h2>
+            <p>This is where the fortune page should return to.</p>
+        </section>
+            
+    </div>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.hash) {
+        let element = document.querySelector(window.location.hash);
+        if (element) {
+            setTimeout(() => {
+                element.scrollIntoView({ behavior: "smooth" });
+            }, 300); // Small delay to ensure the page loads first
+        }
+    }
+});
+
+        function startMusic() {
+    let audio = document.getElementById("bg-music");
+
+    audio.play().then(() => {
+        console.log("Music Started!");
+
+        // Start page hide karna
+        document.getElementById("startPage").style.display = "none";
+
+        // Section1 ko show karna
+        let section1 = document.getElementById("section1");
+        section1.style.display = "flex";
+        section1.classList.add("active");
+    }).catch(error => {
+        console.log("Error playing audio: ", error);
+        alert("Music play failed! Try clicking again.");
+    });
+}
+
+
+function nextSection(index) {
+    let currentSection = document.getElementById(`section${index}`);
+    let nextSection = document.getElementById(`section${index + 1}`);
+
+    // Current section hide karo
+    currentSection.style.display = "none";
+    currentSection.classList.remove("active");
+
+    // Next section show karo
+    nextSection.style.display = "flex";
+    nextSection.classList.add("active");
+}
+
+
+document.addEventListener("click", function(event) {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    document.body.appendChild(heart);
+
+    heart.style.left = `${event.clientX}px`;
+    heart.style.top = `${event.clientY}px`;
+
+    // Remove the heart after animation
+    setTimeout(() => {
+        heart.remove();
+    }, 1500);
+});
+
+function showReply() {
+    let message = document.getElementById("loveMessage").value;
+    let display = document.getElementById("displayMessage");
+
+    if (message.trim() !== "") {
+        display.innerHTML = `💌 Your Reply: "${message}" 💕`;
+        localStorage.setItem("loveMessage", message); // Save the message
+        document.getElementById("loveMessage").value = ""; // Clear input
+    } else {
+        alert("Kuch toh likho meri jaan! 🥹💖");
+    }
+}
+
+// Save message even after refreshing
+window.onload = function () {
+    let savedMessage = localStorage.getItem("loveMessage");
+    if (savedMessage) {
+        document.getElementById("displayMessage").innerHTML = `💌 Your Reply: "${savedMessage}" 💕`;
+    }
+};
+
+
+function createFirework(x, y) {
+    let particles = 30;
+    let colors = ["#ffcc00", "#ff4d79", "#00ccff", "#ff66ff", "#ff9933"];
+
+    for (let i = 0; i < particles; i++) {
+        let sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(sparkle);
+
+        let angle = (Math.PI * 2) * (i / particles);
+        let radius = Math.random() * 50 + 30;
+
+        let targetX = x + Math.cos(angle) * radius;
+        let targetY = y + Math.sin(angle) * radius;
+
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+
+        setTimeout(() => {
+            sparkle.style.transform = `translate(${targetX - x}px, ${targetY - y}px)`;
+            sparkle.style.opacity = 0;
+        }, 10);
+
+        setTimeout(() => sparkle.remove(), 1000);
+    }
+}
+
+
+// Activate fireworks only on the last section
+document.getElementById("section4").addEventListener("click", function(event) {
+    createFirework(event.clientX, event.clientY);
+});
+
+function createFloatingHeart() {
+    let heart = document.createElement("div");
+    heart.classList.add("floating-heart");
+    heart.innerHTML = "❤️";
+    document.body.appendChild(heart);
+
+    let randomX = Math.random() * window.innerWidth;
+    heart.style.left = `${randomX}px`;
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+// Create floating hearts every 1 second
+setInterval(createFloatingHeart, 1000);
+
+function saveMusicTime() {
+    let audio = document.getElementById("bg-music");
+    localStorage.setItem("musicTime", audio.currentTime); // Save time
+    localStorage.setItem("isPlaying", !audio.paused); // Check if playing
+}
+    
+    </script>
+</body>
+</html>
